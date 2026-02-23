@@ -1,57 +1,49 @@
-# NeuraBrain 🧠
-
-**NeuraBrain** is an AI-powered cognitive intelligence system designed to solve the "Retention Gap." Instead of focusing on content completion, NeuraBrain predicts learning decay before performance drops, shifting students from reactive cramming to proactive, data-driven mastery.
-
----
-
-## 🚩 The Problem
-Most students don't fail due to a lack of effort, but due to inefficient cognitive habits. Current Learning Management Systems (LMS) track *progress bars*, not *memory*.
-
-* **Context Switching:** Students bounce between topics, preventing deep encoding.
-* **The Forgetting Curve:** Core fundamentals fade without strategically timed reinforcement.
-* **Reactive Revision:** Studying usually happens as a "panic response" before exams.
-* **No Retention Metrics:** There is no scientific way for a student to know what they actually remember vs. what they've just "seen."
-
-## 💡 The Solution
-NeuraBrain transforms study behavior into actionable cognitive insights. By analyzing how a student interacts with material, the platform models their unique memory decay and intervenes at the optimal moment.
-
-> **Key Shift:** NeuraBrain doesn't track what you completed; it predicts what you will forget.
+# NeuraBrain  
+### AI-Powered Cognitive Learning Intelligence System  
 
 ---
 
-## ✨ Key Features
+## Overview
 
-### 📊 Cognitive Analytics
-* **Dynamic Retention Score:** A live metric representing the strength of a concept in long-term memory.
-* **Memory Decay Modeling:** Uses AI to predict the "half-life" of learned topics based on study patterns.
-* **Behavioral Tracking:** Monitors time-per-topic and "switching fatigue" to optimize focus sessions.
+NeuraBrain is a cognitive intelligence platform designed to improve how students retain knowledge. Instead of tracking only content completion, the system models learning behavior and predicts memory decay to help students revise at the right time.
 
-### 🛠 Proactive Intervention
-* **Predictive Weakness Detection:** Identifies high-risk topics *before* an exam or assessment occurs.
-* **Automated Revision Scheduling:** Automatically pushes personalized review sessions based on Spaced Repetition (SRS) principles.
-* **Adaptive Reinforcement:** Generates dynamic quizzes specifically targeting concepts where the retention score is dropping.
+It focuses on retention, not just effort.
 
 ---
 
-## 🚀 How It Works
+## Problem
 
-1.  **Analyze:** The system monitors study duration, consistency, and topic-switching behavior.
-2.  **Model:** Data is fed into a cognitive model to calculate the probability of recall for each concept.
-3.  **Predict:** NeuraBrain flags topics where memory strength falls below a critical threshold (e.g., < 60%).
-4.  **Optimize:** The platform injects a "micro-review" or quiz into the student's schedule to reset the forgetting curve.
+Students struggle with retention, not effort.
+
+They frequently switch between topics, study inconsistently, forget core fundamentals over time, and prepare randomly before exams. There is no scientific way for them to measure what they truly remember.
+
+Existing learning platforms track what has been completed but do not analyze how much has been retained.
+
+There is currently no intelligent system that:
+
+- Tracks memory decay  
+- Detects conceptual weakness early  
+- Predicts what a student is likely to forget  
+- Adapts revision timing automatically  
+
+As a result, students revise reactively instead of proactively.
 
 ---
 
-## 🛠 Tech Stack (Example)
-* **Frontend:** React / Next.js
-* **Backend:** Python (FastAPI / Flask)
-* **AI/ML:** TensorFlow or PyTorch (for decay modeling)
-* **Database:** PostgreSQL / Redis (for real-time event tracking)
+## Solution
 
----
+NeuraBrain introduces an AI-driven learning pattern engine that predicts knowledge decay before performance drops.
 
-## 📈 Impact
-By moving from passive studying to **Data-Driven Cognitive Optimization**, NeuraBrain aims to:
-* Reduce total study time by eliminating redundant reviews.
-* Increase long-term retention rates by up to 300%.
-* Eliminate "exam anxiety" through predictable performance metrics.
+The system:
+
+- Tracks time spent per topic  
+- Monitors study consistency and switching behavior  
+- Calculates a dynamic retention score  
+- Models memory decay over time  
+- Identifies high-risk topics before exams  
+- Automatically schedules personalized revision  
+- Generates adaptive quizzes to reinforce weak concepts  
+
+Instead of tracking what was completed, NeuraBrain predicts what will be forgotten.
+
+It transforms learning from passive studying into data-driven cognitive optimization.
