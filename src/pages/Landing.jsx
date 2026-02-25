@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
   const [time, setTime] = useState(new Date());
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -13,206 +14,165 @@ const Landing = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Image carousel effect - changes image every 3 seconds
+  useEffect(() => {
+    const imageTimer = setTimeout(() => {
+      const imageInterval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 3);
+      }, 3000);
+      return () => clearInterval(imageInterval);
+    }, 3000); // Start after 3 seconds
+    return () => clearTimeout(imageTimer);
+  }, []);
+
   const memoryMapImages = [
-    "https://img.freepik.com/free-photo/top-view-memory-concept-with-post-its-magnifying-glass_23-2149320984.jpg?semt=ais_hybrid&w=740&q=80"
+    "https://img.freepik.com/free-photo/top-view-memory-concept-with-post-its-magnifying-glass_23-2149320984.jpg?semt=ais_hybrid&w=740&q=80",
+    "https://www.geckoboard.com/uploads/customer-service-dashboard-example-geckoboard.png",
+    "https://img.freepik.com/free-photo/shipping-logistic-delivery-freight-cargo-concept_53876-124951.jpg?semt=ais_user_personalization&w=740&q=80"
   ];
 
-  const formattedTime = `${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')} GMT+1`;
-
   return (
-    <div className="bg-[#0a0a0a] text-white font-sans selection:bg-white/20">
+    <div className="bg-[#050505] text-white font-sans selection:bg-orange-500/30">
       
       {/* SECTION 1: NEURAL RETENTION HERO */}
-      <section className="min-h-screen bg-[#8b3a1a] text-white font-sans selection:bg-white/20 overflow-hidden relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_transparent_0%,_rgba(0,0,0,0.4)_100%)] z-0" />
+      <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#050505]">
         
+        {/* NEW BACKGROUND IMAGE LAYER */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=1200" 
+            className="w-full h-full object-cover grayscale brightness-50 contrast-125 opacity-40"
+            alt="Neural Background"
+          />
+          {/* Overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505]" />
+        </div>
+
+        {/* Ambient Background Glows (Reduced opacity to work with new BG) */}
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-orange-600/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-600/5 blur-[100px] rounded-full opacity-30" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
+
         {/* NAVBAR */}
         <nav className="relative z-50 flex items-center justify-between px-12 py-10">
           <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="relative w-6 h-6 flex flex-wrap gap-1 justify-center items-center">
-                <div className="w-1.5 h-1.5 bg-white rounded-full group-hover:bg-orange-400 transition-colors"></div>
-                <div className="w-1.5 h-1.5 bg-white/40 rounded-full"></div>
-                <div className="w-1.5 h-1.5 bg-white/40 rounded-full"></div>
-                <div className="w-1.5 h-1.5 bg-white rounded-full group-hover:bg-orange-400 transition-colors delay-75"></div>
+            <div className="grid grid-cols-2 gap-1 w-5 h-5">
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-white/20 rounded-full" />
+              <div className="w-2 h-2 bg-white/20 rounded-full" />
+              <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse [animation-delay:0.2s]" />
             </div>
-            <span className="text-xl font-bold tracking-tight uppercase">NeuraBrain</span>
+            <span className="text-xl font-black tracking-tighter uppercase italic">NeuraBrain</span>
           </div>
           
-          {/* UPDATED NAV LINKS */}
-          <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.2em] font-bold">
-            <a href="/dashboard" className="text-white transition-colors flex items-center gap-2 group">
-              <span className="w-1 h-1 bg-white rounded-full transition-all shadow-[0_0_8px_white]"></span> 
-              Dashboard
-            </a>
-            <a href="/memory-maps" className="text-white/70 hover:text-white transition-colors flex items-center gap-2 group">
-              <span className="w-1 h-1 bg-white/40 group-hover:bg-white rounded-full transition-all"></span> 
-              Memory Maps
-            </a>
-            <a href="/decay-tracking" className="text-white/70 hover:text-white transition-colors flex items-center gap-2 group">
-              <span className="w-1 h-1 bg-white/40 group-hover:bg-white rounded-full transition-all"></span> 
-              Decay Tracking
-            </a>
-            <a href="/revision-ai" className="text-white/70 hover:text-white transition-colors flex items-center gap-2 group">
-              <span className="w-1 h-1 bg-white/40 group-hover:bg-white rounded-full transition-all"></span> 
-              Revision AI
-            </a>
+          <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.2em] font-bold text-white/50">
+            <a href="/dashboard" className="hover:text-white transition-colors">Dashboard</a>
+            <a href="/memory-maps" className="hover:text-white transition-colors">Memory Maps</a>
+            <a href="/decay-tracking" className="hover:text-white transition-colors">Decay Tracking</a>
           </div>
 
-          <button 
-            onClick={() => navigate('/dashboard')}
-            className="border border-white/30 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-[#8b3a1a] transition-all font-bold"
-          >
-            Access Portal
-          </button>
+          {isAuthenticated ? (
+            <button 
+              onClick={() => navigate('/dashboard')}
+              className="border border-white/10 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
+            >
+              Access Portal
+            </button>
+          ) : (
+            <button 
+              onClick={() => setIsAuthenticated(true)}
+              className="border border-white/10 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
+            >
+              Login
+            </button>
+          )}
         </nav>
 
-        <main className="relative z-10 px-12 grid grid-cols-12 min-h-[75vh]">
-          <div className="col-span-12 md:col-span-4 flex flex-col justify-between py-10">
-            <p className="text-white/70 text-sm leading-relaxed max-w-[280px]">
-              Effort isn't the problem. Retention is. Most students complete chapters only to lose 70% of the data within 48 hours. We fix the leak.
-            </p>
-            <h1 className="text-7xl md:text-[95px] font-medium leading-[0.85] tracking-tighter">
-              Active <br /> 
-              <span className="text-white/30">Recall</span> for <br /> 
-              a <span className="italic font-serif">Perfect</span> <br /> 
-              Score
-            </h1>
-          </div>
-
-          {/* NEURAL CORE ICON */}
-          <div className="col-span-12 md:col-span-4 flex items-center justify-center relative">
-            <div className="absolute w-[28rem] h-[28rem] bg-white/10 blur-[120px] rounded-full animate-pulse" />
-            <div className="relative flex items-center justify-center">
-                <div className="absolute w-[24rem] h-[24rem] border border-white/10 rounded-full animate-[spin_20s_linear_infinite]" />
-                <div className="relative w-72 h-72 bg-gradient-to-br from-white/20 to-transparent backdrop-blur-2xl rounded-3xl border border-white/20 rotate-45 flex items-center justify-center overflow-hidden shadow-2xl">
-                    <div className="w-full h-full absolute inset-0 bg-[grid-white/5] [mask-image:linear-gradient(white,transparent)]" />
-                    <div className="w-20 h-20 bg-white rounded-full shadow-[0_0_50px_rgba(255,255,255,0.4)] animate-pulse" />
-                </div>
+        <main className="relative z-10 px-12 grid grid-cols-12 min-h-[70vh] items-center">
+          <div className="col-span-12 md:col-span-6 flex flex-col justify-center py-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/5 w-fit mb-8">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-orange-200/70 font-bold">Test Ur Memory</span>
             </div>
+
+            <h1 className="text-7xl md:text-[100px] font-bold leading-[0.85] tracking-tighter mb-8 text-white drop-shadow-2xl">
+              Active <br /> 
+              <span className="text-white/20">Recall</span> for <br /> 
+              a <span className="italic font-serif font-light text-orange-500">Perfect</span> Score
+            </h1>
+
+            <p className="text-white/60 text-sm leading-relaxed max-w-[380px] border-l-2 border-orange-600 pl-6 mb-10 backdrop-blur-sm">
+              Effort isn't the problem. Retention is. Most students lose 70% of data within 48 hours. We fix the leak using predictive AI drift analysis.
+            </p>
+            
+            {/* REDESIGNED BUTTON */}
+            <button className="group relative w-fit overflow-hidden bg-white/[0.03] border border-orange-500/30 px-10 py-5 transition-all duration-500 hover:border-orange-500 hover:shadow-[0_0_30px_-5px_rgba(249,115,22,0.4)]">
+              <div className="absolute inset-0 w-0 bg-orange-500 transition-all duration-500 ease-out group-hover:w-full" />
+              <span className="relative z-10 flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white group-hover:text-black">
+                Test Ur Memory
+                <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </button>
           </div>
 
-          <div className="col-span-12 md:col-span-4 flex flex-col items-end justify-between py-10">
-            <p className="text-white/60 text-sm text-right max-w-[240px] leading-relaxed">
-              Analyze your Ebbinghaus Forgetting Curve in real-time with our neural mapping specialists.
-            </p>
-            <div className="w-full max-w-[280px] group cursor-pointer">
-              <div className="flex justify-between items-center mb-2 px-1 text-white/40 text-[10px] uppercase tracking-widest">
-                <span>View Memory Map</span>
-                <span>→</span>
-              </div>
-              <div className="relative aspect-[3/4] overflow-hidden bg-black/20 backdrop-blur-md border border-white/10">
-                {memoryMapImages.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Memory Map ${index + 1}`}
-                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${
-                      index === currentImageIndex 
-                        ? 'opacity-80 scale-100' 
-                        : 'opacity-0 scale-95'
-                    } group-hover:opacity-100 group-hover:scale-105`}
-                  />
-                ))}
-                {/* Image indicators */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
-                  {memoryMapImages.map((_, index) => (
+          {/* NEURAL CORE ICON / VISUAL */}
+          <div className="col-span-12 md:col-span-6 flex items-center justify-center relative min-h-[500px]">
+            <div className="absolute w-[30rem] h-[30rem] bg-orange-600/10 blur-[120px] rounded-full animate-pulse" />
+            
+            <div className="relative flex items-center justify-center w-full h-full">
+                <div className="absolute w-[28rem] h-[28rem] border border-white/5 rounded-full" />
+                
+                <div className="absolute w-[32rem] h-[32rem] animate-[spin_40s_linear_infinite]">
+                  {[...Array(6)].map((_, i) => (
                     <div
-                      key={index}
-                      className={`w-1 h-1 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex ? 'bg-white' : 'bg-white/40'
-                      }`}
-                    />
+                      key={i}
+                      className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
+                      style={{
+                        transform: `rotate(${i * 60}deg) translateY(-16rem) rotate(-${i * 60}deg)`,
+                      }}
+                    >
+                      <div className="w-full h-full rounded-full border border-white/20 bg-black/50 overflow-hidden shadow-lg group flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2c0 2.66 5.34 4 8 4s8-1.34 8-4v-2c0-2.66-5.34-4-8-4z"/>
+                        </svg>
+                      </div>
+                    </div>
                   ))}
                 </div>
-              </div>
+
+                <div className="absolute w-[22rem] h-[22rem] border border-white/10 border-dashed rounded-full animate-[spin_20s_linear_infinite_reverse]" />
+                
+                <div className="relative z-10 w-80 h-96 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl rounded-[2.5rem] border border-white/10 rotate-3 flex items-center justify-center overflow-hidden shadow-2xl group hover:rotate-0 transition-transform duration-700">
+                    {memoryMapImages.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt="Preview"
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                          index === currentImageIndex 
+                            ? 'opacity-30 grayscale scale-100' 
+                            : 'opacity-0 grayscale scale-95 pointer-events-none'
+                        } ${
+                          index === currentImageIndex ? 'group-hover:grayscale-0 group-hover:opacity-50' : ''
+                        }`}
+                      />
+                    ))}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+                    <div className="z-10 text-center">
+                        <p className="text-[10px] uppercase tracking-[0.4em] font-bold">
+                          {currentImageIndex === 0 ? "Memory Maps" : currentImageIndex === 1 ? "Dashboard" : "Decay Tracking"}
+                        </p>
+                    </div>
+                </div>
             </div>
           </div>
         </main>
-
-        <footer className="absolute bottom-0 w-full px-12 py-8 flex justify-between items-end border-t border-white/5 text-[9px] text-white/30 tracking-[0.3em] uppercase font-bold z-50">
-          <div><p className="text-white/50 mb-1">Retention Analysis</p><p>2026 Edition</p></div>
-          <div className="text-center"><p className="text-white/50 mb-1">Cognitive Node</p><p>{formattedTime}</p></div>
-          <div className="text-right"><p className="text-white/50 mb-1">Predictive Revision</p><p>Framework v4.2</p></div>
-        </footer>
       </section>
-
-      {/* SECTION 2: UPDATED METRICS WITH BACKGROUND IMAGE */}
-      <section className="min-h-screen bg-[#F2F2F2] text-black px-10 py-12 relative flex flex-col overflow-hidden">
-        
-        {/* BACKGROUND IMAGE (BOOK/STUDY) */}
-        <div className="absolute inset-0 z-0">
-            <img 
-              src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2000" 
-              className="w-full h-full object-cover opacity-[0.07] grayscale"
-              alt="Background study"
-            />
-        </div>
-
-        {/* LARGE BACKGROUND TEXT "14 HRS" OVER THE IMAGE */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-1">
-            <span className="text-[40vw] font-black text-black/[0.05] leading-none tracking-tighter uppercase whitespace-nowrap">
-                14 HRS
-            </span>
-        </div>
-
-        <div className="relative z-10 flex justify-between items-center mb-12 border-b border-black/10 pb-4">
-          <div className="flex items-center gap-2">
-             <div className="w-4 h-4 bg-black flex flex-wrap gap-0.5 items-center justify-center rounded-sm">
-                <div className="w-1 h-1 bg-white"></div>
-                <div className="w-1 h-1 bg-white/40"></div>
-                <div className="w-1 h-1 bg-white/40"></div>
-                <div className="w-1 h-1 bg-white"></div>
-             </div>
-             <span className="text-[10px] font-black uppercase tracking-[0.3em]">Retention Metrics</span>
-          </div>
-          <div className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse"></div>
-        </div>
-
-        <div className="relative z-10 flex-grow flex flex-col justify-center">
-          <div className="grid grid-cols-12 gap-0 items-baseline">
-            <div className="col-span-1">
-              <span className="text-[8px] uppercase tracking-widest font-black opacity-30 vertical-text">Retention %</span>
-            </div>
-            
-            <div className="col-span-11 flex items-baseline relative">
-              <h2 className="text-[24vw] font-black leading-[0.8] tracking-[-0.05em] flex items-baseline">
-                84
-                <span className="text-[15vw] opacity-10 mx-[-0.05em]">/</span>
-                100
-              </h2>
-              
-              <div className="flex flex-col ml-8 max-w-[150px]">
-                <span className="text-[10px] font-bold uppercase tracking-widest leading-tight border-l-2 border-black pl-3 py-1">
-                    Neural Retention <br/> Score (Average)
-                </span>
-                <span className="text-[8px] mt-2 opacity-40 uppercase tracking-tighter">
-                    Calculated via AI Memory Drift
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative z-10 grid grid-cols-12 mt-12 bg-white/50 border border-black/5 overflow-hidden backdrop-blur-sm">
-          <div className="col-span-8 relative h-64 overflow-hidden">
-            <img 
-              src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1200" 
-              className="w-full h-full object-cover grayscale brightness-50"
-              alt="Studying focus"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-red-900/40 to-transparent"></div>
-            <div className="absolute bottom-6 left-6 text-white">
-              <p className="text-4xl font-black leading-none tracking-tighter uppercase">Predictive Analysis:<br/>Critical Score Threshold</p>
-            </div>
-          </div>
-          
-          <div className="col-span-4 p-8 flex flex-col justify-between items-end text-right">
-             <span className="text-[10px] font-black opacity-20 uppercase tracking-widest">Next Critical Revision</span>
-             <p className="text-3xl font-black tracking-tighter">In 14 Hours</p>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 };
