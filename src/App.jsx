@@ -1,26 +1,46 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-// Import your page
+// Import Pages
 import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
+import MemoryMaps from './pages/MemoryMaps';
+import Profile from './pages/Profile';
+import Connect from './components/ConnectUs';
+import PrivacyPolicy from './components/Privacy_Policy';
+import TermsOfService from './components/TermsOfService';
+
+// Helper component to reset scroll position on navigation
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        {/* You can add a Global Navbar here if needed */}
-        
+      <ScrollToTop />
+      <div className="App bg-[#050505] min-h-screen selection:bg-orange-500 selection:text-black">
         <Routes>
-          {/* Main Landing Page Route */}
+          {/* Main Entry */}
           <Route path="/" element={<Landing />} />
+          
+          {/* Core App Sections */}
           <Route path="/dashboard" element={<Dashboard />} />
-          {/* Future routes can be added here, e.g.:
-              <Route path="/dashboard" element={<Dashboard />} /> 
-          */}
-        </Routes>
+          <Route path="/memory-maps" element={<MemoryMaps />} />
+          <Route path="/profile" element={<Profile />} />
+          
+          {/* Communication & Legal */}
+          <Route path="/connect" element={<Connect />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
 
-        {/* You can add a Global Footer here */}
+          {/* Fallback route - Redirects to Landing if page not found */}
+          <Route path="*" element={<Landing />} />
+        </Routes>
       </div>
     </Router>
   );

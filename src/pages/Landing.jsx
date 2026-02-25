@@ -68,24 +68,31 @@ const Landing = () => {
           <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.2em] font-bold text-white/50">
             <a href="/dashboard" className="hover:text-white transition-colors">Dashboard</a>
             <a href="/memory-maps" className="hover:text-white transition-colors">Memory Maps</a>
-            <a href="/decay-tracking" className="hover:text-white transition-colors">Decay Tracking</a>
           </div>
 
-          {isAuthenticated ? (
+          <div className="flex items-center gap-4">
             <button 
-              onClick={() => navigate('/dashboard')}
-              className="border border-white/10 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
+              onClick={() => navigate('/connect')}
+              className="border border-orange-500/30 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-orange-500 hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
             >
-              Access Portal
+              Connect
             </button>
-          ) : (
-            <button 
-              onClick={() => setIsAuthenticated(true)}
-              className="border border-white/10 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
-            >
-              Login
-            </button>
-          )}
+            {isAuthenticated ? (
+              <button 
+                onClick={() => navigate('/dashboard')}
+                className="border border-white/10 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
+              >
+                Access Portal
+              </button>
+            ) : (
+              <button 
+                onClick={() => setIsAuthenticated(true)}
+                className="border border-white/10 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
+              >
+                Login
+              </button>
+            )}
+          </div>
         </nav>
 
         <main className="relative z-10 px-12 grid grid-cols-12 min-h-[70vh] items-center">
@@ -133,7 +140,7 @@ const Landing = () => {
                       key={i}
                       className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
                       style={{
-                        transform: `rotate(${i * 60}deg) translateY(-16rem) rotate(-${i * 60}deg)`,
+                        transform: `rotate(${i * 60}deg) translateY(-16rem)`,
                       }}
                     >
                       <div className="w-full h-full rounded-full border border-white/20 bg-black/50 overflow-hidden shadow-lg group flex items-center justify-center">

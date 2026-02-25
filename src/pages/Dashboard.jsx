@@ -28,7 +28,6 @@ const Dashboard = () => {
           <div className="hidden lg:flex items-center gap-6 text-[10px] uppercase tracking-[0.2em] font-bold text-white/50">
             <button className="px-4 py-1.5 bg-white text-black rounded-sm">Overview</button>
             <button className="hover:text-white transition-colors">Memory Maps</button>
-            <button className="hover:text-white transition-colors">Decay Tracking</button>
           </div>
         </div>
 
