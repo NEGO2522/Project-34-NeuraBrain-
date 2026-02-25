@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
   const [time, setTime] = useState(new Date());
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -9,6 +12,23 @@ const Landing = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Image carousel effect - changes image every 3 seconds
+  useEffect(() => {
+    const imageTimer = setTimeout(() => {
+      const imageInterval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 3);
+      }, 3000);
+      return () => clearInterval(imageInterval);
+    }, 3000); // Start after 3 seconds
+    return () => clearTimeout(imageTimer);
+  }, []);
+
+  const memoryMapImages = [
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800",
+    "https://3.bp.blogspot.com/-B61sHZd10Tk/Ti9vDSJQ-WI/AAAAAAAABXQ/HWTNVaiXQG8/s1600/P1040169.JPG",
+    "https://theartsmock.weebly.com/uploads/5/2/2/1/52213363/1040019_orig.jpg"
+  ];
 
   const formattedTime = `${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')} GMT+1`;
 
@@ -51,7 +71,10 @@ const Landing = () => {
             </a>
           </div>
 
-          <button className="border border-white/30 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-[#8b3a1a] transition-all font-bold">
+          <button 
+            onClick={() => navigate('/dashboard')}
+            className="border border-white/30 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-[#8b3a1a] transition-all font-bold"
+          >
             Access Portal
           </button>
         </nav>
@@ -93,11 +116,29 @@ const Landing = () => {
                 <span>→</span>
               </div>
               <div className="relative aspect-[3/4] overflow-hidden bg-black/20 backdrop-blur-md border border-white/10">
-                <img 
-                  src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800" 
-                  alt="Neural Network Nodes" 
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                />
+                {memoryMapImages.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Memory Map ${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${
+                      index === currentImageIndex 
+                        ? 'opacity-80 scale-100' 
+                        : 'opacity-0 scale-95'
+                    } group-hover:opacity-100 group-hover:scale-105`}
+                  />
+                ))}
+                {/* Image indicators */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
+                  {memoryMapImages.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-1 h-1 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex ? 'bg-white' : 'bg-white/40'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
