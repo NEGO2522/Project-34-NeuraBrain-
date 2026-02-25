@@ -14,14 +14,13 @@ const Landing = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Image carousel effect - changes image every 3 seconds
   useEffect(() => {
     const imageTimer = setTimeout(() => {
       const imageInterval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 3);
       }, 3000);
       return () => clearInterval(imageInterval);
-    }, 3000); // Start after 3 seconds
+    }, 3000);
     return () => clearTimeout(imageTimer);
   }, []);
 
@@ -34,21 +33,19 @@ const Landing = () => {
   return (
     <div className="bg-[#050505] text-white font-sans selection:bg-orange-500/30">
       
-      {/* SECTION 1: NEURAL RETENTION HERO */}
       <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#050505]">
         
-        {/* NEW BACKGROUND IMAGE LAYER */}
+        {/* BACKGROUND LAYER */}
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=1200" 
             className="w-full h-full object-cover grayscale brightness-50 contrast-125 opacity-40"
             alt="Neural Background"
           />
-          {/* Overlay to ensure text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505]" />
         </div>
 
-        {/* Ambient Background Glows (Reduced opacity to work with new BG) */}
+        {/* AMBIENT GLOWS */}
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-orange-600/5 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-600/5 blur-[100px] rounded-full opacity-30" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
@@ -86,7 +83,7 @@ const Landing = () => {
               </button>
             ) : (
               <button 
-                onClick={() => setIsAuthenticated(true)}
+                onClick={() => navigate('/login')}
                 className="border border-white/10 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-all font-bold backdrop-blur-sm rounded-sm"
               >
                 Login
@@ -115,7 +112,6 @@ const Landing = () => {
               Effort isn't the problem. Retention is. Most students lose 70% of data within 48 hours. We fix the leak using predictive AI drift analysis.
             </p>
             
-            {/* REDESIGNED BUTTON */}
             <button className="group relative w-fit overflow-hidden bg-white/[0.03] border border-orange-500/30 px-10 py-5 transition-all duration-500 hover:border-orange-500 hover:shadow-[0_0_30px_-5px_rgba(249,115,22,0.4)]">
               <div className="absolute inset-0 w-0 bg-orange-500 transition-all duration-500 ease-out group-hover:w-full" />
               <span className="relative z-10 flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-white group-hover:text-black">
@@ -127,32 +123,27 @@ const Landing = () => {
             </button>
           </div>
 
-          {/* NEURAL CORE ICON / VISUAL */}
+          {/* VISUAL CORE */}
           <div className="col-span-12 md:col-span-6 flex items-center justify-center relative min-h-[500px]">
             <div className="absolute w-[30rem] h-[30rem] bg-orange-600/10 blur-[120px] rounded-full animate-pulse" />
             
             <div className="relative flex items-center justify-center w-full h-full">
                 <div className="absolute w-[28rem] h-[28rem] border border-white/5 rounded-full" />
-                
                 <div className="absolute w-[32rem] h-[32rem] animate-[spin_40s_linear_infinite]">
                   {[...Array(6)].map((_, i) => (
                     <div
                       key={i}
                       className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
-                      style={{
-                        transform: `rotate(${i * 60}deg) translateY(-16rem)`,
-                      }}
+                      style={{ transform: `rotate(${i * 60}deg) translateY(-16rem)` }}
                     >
-                      <div className="w-full h-full rounded-full border border-white/20 bg-black/50 overflow-hidden shadow-lg group flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="w-full h-full rounded-full border border-white/20 bg-black/50 overflow-hidden shadow-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white/60" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2c0 2.66 5.34 4 8 4s8-1.34 8-4v-2c0-2.66-5.34-4-8-4z"/>
                         </svg>
                       </div>
                     </div>
                   ))}
                 </div>
-
-                <div className="absolute w-[22rem] h-[22rem] border border-white/10 border-dashed rounded-full animate-[spin_20s_linear_infinite_reverse]" />
                 
                 <div className="relative z-10 w-80 h-96 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl rounded-[2.5rem] border border-white/10 rotate-3 flex items-center justify-center overflow-hidden shadow-2xl group hover:rotate-0 transition-transform duration-700">
                     {memoryMapImages.map((image, index) => (
@@ -160,13 +151,7 @@ const Landing = () => {
                         key={index}
                         src={image}
                         alt="Preview"
-                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-                          index === currentImageIndex 
-                            ? 'opacity-30 grayscale scale-100' 
-                            : 'opacity-0 grayscale scale-95 pointer-events-none'
-                        } ${
-                          index === currentImageIndex ? 'group-hover:grayscale-0 group-hover:opacity-50' : ''
-                        }`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${index === currentImageIndex ? 'opacity-30 grayscale scale-100 group-hover:grayscale-0 group-hover:opacity-50' : 'opacity-0 grayscale scale-95 pointer-events-none'}`}
                       />
                     ))}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
@@ -179,6 +164,29 @@ const Landing = () => {
             </div>
           </div>
         </main>
+
+        {/* --- FOOTER LINKS ADDED HERE --- */}
+        <footer className="absolute bottom-10 right-12 z-50 flex items-center gap-6">
+          <div className="flex items-center gap-6 text-[9px] font-bold uppercase tracking-[0.3em] text-white/30">
+            <button 
+              onClick={() => navigate('/privacy')} 
+              className="hover:text-orange-500 transition-colors duration-300"
+            >
+              Privacy Protocol
+            </button>
+            <div className="h-3 w-[1px] bg-white/10" />
+            <button 
+              onClick={() => navigate('/terms')} 
+              className="hover:text-orange-500 transition-colors duration-300"
+            >
+              Terms of Sync
+            </button>
+          </div>
+          
+          {/* Decorative version tag */}
+         
+        </footer>
+
       </section>
     </div>
   );
