@@ -88,18 +88,6 @@ const Landing = () => {
                     <div className="w-full h-full absolute inset-0 bg-[grid-white/5] [mask-image:linear-gradient(white,transparent)]" />
                     <div className="w-20 h-20 bg-white rounded-full shadow-[0_0_50px_rgba(255,255,255,0.4)] animate-pulse" />
                 </div>
-                {/* Orbiting orange dot */}
-                <div className="absolute w-[20rem] h-[20rem] animate-[spin_8s_linear_infinite]">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-5 h-5 bg-orange-500 rounded-full shadow-[0_0_15px_#f97316]" />
-                  </div>
-                </div>
-                {/* Orbiting white dot */}
-                <div className="absolute w-[18rem] h-[18rem] animate-[spin_12s_linear_infinite_reverse]">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-4 h-4 bg-white rounded-full shadow-[0_0_10px_white]" />
-                  </div>
-                </div>
             </div>
           </div>
 
