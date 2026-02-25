@@ -13,21 +13,8 @@ const Landing = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Image carousel effect - changes image every 3 seconds
-  useEffect(() => {
-    const imageTimer = setTimeout(() => {
-      const imageInterval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 3);
-      }, 3000);
-      return () => clearInterval(imageInterval);
-    }, 3000); // Start after 3 seconds
-    return () => clearTimeout(imageTimer);
-  }, []);
-
   const memoryMapImages = [
-    "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800",
-    "https://3.bp.blogspot.com/-B61sHZd10Tk/Ti9vDSJQ-WI/AAAAAAAABXQ/HWTNVaiXQG8/s1600/P1040169.JPG",
-    "https://theartsmock.weebly.com/uploads/5/2/2/1/52213363/1040019_orig.jpg"
+    "https://img.freepik.com/free-photo/top-view-memory-concept-with-post-its-magnifying-glass_23-2149320984.jpg?semt=ais_hybrid&w=740&q=80"
   ];
 
   const formattedTime = `${time.getHours()}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')} GMT+1`;
@@ -94,15 +81,25 @@ const Landing = () => {
 
           {/* NEURAL CORE ICON */}
           <div className="col-span-12 md:col-span-4 flex items-center justify-center relative">
-            <div className="absolute w-72 h-72 bg-white/10 blur-[120px] rounded-full animate-pulse" />
+            <div className="absolute w-[28rem] h-[28rem] bg-white/10 blur-[120px] rounded-full animate-pulse" />
             <div className="relative flex items-center justify-center">
-                <div className="absolute w-64 h-64 border border-white/10 rounded-full animate-[spin_20s_linear_infinite]" />
-                <div className="relative w-40 h-40 bg-gradient-to-br from-white/20 to-transparent backdrop-blur-2xl rounded-3xl border border-white/20 rotate-45 flex items-center justify-center overflow-hidden shadow-2xl">
+                <div className="absolute w-[24rem] h-[24rem] border border-white/10 rounded-full animate-[spin_20s_linear_infinite]" />
+                <div className="relative w-72 h-72 bg-gradient-to-br from-white/20 to-transparent backdrop-blur-2xl rounded-3xl border border-white/20 rotate-45 flex items-center justify-center overflow-hidden shadow-2xl">
                     <div className="w-full h-full absolute inset-0 bg-[grid-white/5] [mask-image:linear-gradient(white,transparent)]" />
-                    <div className="w-12 h-12 bg-white rounded-full shadow-[0_0_50px_rgba(255,255,255,0.4)] animate-pulse" />
+                    <div className="w-20 h-20 bg-white rounded-full shadow-[0_0_50px_rgba(255,255,255,0.4)] animate-pulse" />
                 </div>
-                <div className="absolute -top-10 -right-4 w-3 h-3 bg-orange-500 rounded-full shadow-[0_0_15px_#f97316]" />
-                <div className="absolute bottom-10 -left-8 w-2 h-2 bg-white rounded-full shadow-[0_0_10px_white]" />
+                {/* Orbiting orange dot */}
+                <div className="absolute w-[20rem] h-[20rem] animate-[spin_8s_linear_infinite]">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-5 h-5 bg-orange-500 rounded-full shadow-[0_0_15px_#f97316]" />
+                  </div>
+                </div>
+                {/* Orbiting white dot */}
+                <div className="absolute w-[18rem] h-[18rem] animate-[spin_12s_linear_infinite_reverse]">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-4 h-4 bg-white rounded-full shadow-[0_0_10px_white]" />
+                  </div>
+                </div>
             </div>
           </div>
 
