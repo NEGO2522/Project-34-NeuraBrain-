@@ -26,8 +26,8 @@ const Dashboard = () => {
           </div>
           
           <div className="hidden lg:flex items-center gap-6 text-[10px] uppercase tracking-[0.2em] font-bold text-white/50">
-            <button className="px-4 py-1.5 bg-white text-black rounded-sm">Overview</button>
-            <button className="hover:text-white transition-colors">Memory Maps</button>
+            <button className="px-4 py-1.5 bg-white text-black rounded-full">Overview</button>
+            <button className="px-4 py-1.5 hover:text-white transition-colors rounded-full border border-white/30 bg-white/5">Memory Maps</button>
           </div>
         </div>
 

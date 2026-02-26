@@ -42,9 +42,9 @@ const MemoryMaps = () => {
           <div className="group cursor-pointer">
             <p className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-4 group-hover:text-orange-500 transition-colors">Navigation</p>
             <ul className="flex flex-col gap-4 text-[11px] font-bold uppercase tracking-widest">
-              <li className="text-white/50 hover:text-white transition-colors" onClick={() => navigate('/dashboard')}>Dashboard</li>
-              <li className="text-orange-500">Memory Maps</li>
-              <li className="text-white/50 hover:text-white transition-colors">Decay Tracking</li>
+              <li className="text-white/50 hover:text-white transition-colors px-3 py-1.5 rounded-full border border-white/40 hover:border-white/60 bg-white/5" onClick={() => navigate('/dashboard')}>Dashboard</li>
+              <li className="text-orange-500 px-3 py-1.5 rounded-full border border-orange-500/50 bg-orange-500/10">Memory Maps</li>
+              <li className="text-white/50 hover:text-white transition-colors px-3 py-1.5 rounded-full border border-white/40 hover:border-white/60 bg-white/5">Decay Tracking</li>
             </ul>
           </div>
 
