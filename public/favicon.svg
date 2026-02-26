@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .circle {
+      transform-origin: center;
+      animation: spin 10s linear infinite;
+    }
+  </style>
+  <circle 
+    cx="16" 
+    cy="16" 
+    r="14" 
+    fill="none" 
+    stroke="#f97316" 
+    stroke-width="2" 
+    stroke-dasharray="4 3" 
+    stroke-opacity="0.2"
+    class="circle"
+  />
+</svg>
