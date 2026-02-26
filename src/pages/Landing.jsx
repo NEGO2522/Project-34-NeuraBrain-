@@ -112,7 +112,7 @@ const Landing = () => {
       {/* SECTION 1 */}
       <section className="relative h-screen w-full flex flex-col bg-[#050505] snap-start overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=1200" className="w-full h-full object-cover grayscale brightness-50 contrast-125 opacity-40" alt="Neural Background" />
+          <img src="https://images.unsplash.com/photo-1771694583915-78f9b39fd6d1?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="w-full h-full object-cover grayscale brightness-50 contrast-125 opacity-40" alt="Neural Background" />
           
           <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none" viewBox="0 0 1440 800" preserveAspectRatio="none">
             <defs>
