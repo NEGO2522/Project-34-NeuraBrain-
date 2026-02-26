@@ -6,6 +6,7 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import MemoryMaps from './pages/MemoryMaps';
 import Profile from './pages/Profile';
+import Login from './auth/Login';
 import Connect from './components/ConnectUs';
 import PrivacyPolicy from './components/Privacy_Policy';
 import TermsOfService from './components/TermsOfService';
@@ -27,6 +28,9 @@ function App() {
         <Routes>
           {/* Main Entry */}
           <Route path="/" element={<Landing />} />
+          
+          {/* Authentication */}
+          <Route path="/login" element={<Login />} />
           
           {/* Core App Sections */}
           <Route path="/dashboard" element={<Dashboard />} />
